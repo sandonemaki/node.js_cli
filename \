@@ -1,0 +1,10 @@
+// comanderモジュールからprogramオブジェクトをインポートする
+import {program} from "commander";
+
+// コマンドライン引数をcomanderでパースする
+program.parse(process.argv);
+
+// ファイルパスをwprogam.args配列から取り出す
+const filePath = program.args[0];
+console.log(filePath);
+
