@@ -11,18 +11,17 @@ program.option("--gfm", "GFMを有効にする");
 program.parse(process.argv);
 // ファイルパスをprogam.args配列から取り出す
 const filePath = program.args[0];
-// コマンドライン引数のオプションを取得する
-const options = program.opts();
 
 // コマンドライン引数で指定されなかったオプションにデフォルト値を上書きする
 const cliOptions = {
-  gfm: options.gfm ?? false,
+  gfm: false,
+  ...program.opts(),
 };
 
 // ファイルを非同期で読み込む
 fs.readFile(filePath, {encoding: "utf8"}).then(file => {
   // md2htmlモジュールを使ってHTMLに変換する
-  const html = md2html.(file, cliOptions);
+  const html = md2html(file, cliOptions);
   console.log(html);
 }).catch(err => {
   console.error(err.message);
