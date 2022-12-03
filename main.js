@@ -3,16 +3,14 @@ import {program} from "commander";
 // fs/promisesモジュールをfsオブジェクトとしてインポートする
 import * as fs from "node:fs/promises";
 // markedモジュールからmarkedオブジェクトをインポートする
-import {marked} from "marked";
+import {md2html} from "./md2html.js";
 
 // gfmオプションを定義する
 program.option("--gfm", "GFMを有効にする");
 // コマンドライン引数をcomanderでパースする
 program.parse(process.argv);
-
 // ファイルパスをprogam.args配列から取り出す
 const filePath = program.args[0];
-
 // コマンドライン引数のオプションを取得する
 const options = program.opts();
 
@@ -23,10 +21,8 @@ const cliOptions = {
 
 // ファイルを非同期で読み込む
 fs.readFile(filePath, {encoding: "utf8"}).then(file => {
-  const html = marked.parse(file, {
-    // オプションの値を使用する
-    gfm: cliOptions.gfm,
-  });
+  // md2htmlモジュールを使ってHTMLに変換する
+  const html = md2html.(file, cliOptions);
   console.log(html);
 }).catch(err => {
   console.error(err.message);
