@@ -2,6 +2,8 @@
 import {program} from "commander";
 // fs/promisesモジュールをfsオブジェクトとしてインポートする
 import * as fs from "node:fs/promises";
+// markedモジュールからmarkedオブジェクトをインポートする
+import {marked} from "marked";
 
 
 // コマンドライン引数をcomanderでパースする
